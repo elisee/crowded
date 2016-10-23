@@ -1,0 +1,34 @@
+{
+  "name": "crowded3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build-server && npm run build-client",
+    "build-server": "tsc -p server",
+    "build-client": "tsc -p client && browserify client/index.js -o public/index.js",
+    "watch-server": "tsc -w -p server",
+    "watch-client": "tsc -w -p client",
+    "watchify-client": "watchify client/index.js -o public/index.js",
+    "start": "node server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.0.33",
+    "@types/express-serve-static-core": "^4.0.37",
+    "@types/mime": "0.0.29",
+    "@types/node": "^6.0.45",
+    "@types/serve-static": "^1.7.31",
+    "@types/socket.io": "^1.4.27",
+    "@types/socket.io-client": "^1.4.27",
+    "express": "^4.14.0",
+    "socket.io": "^1.5.0"
+  },
+  "devDependencies": {
+    "socket.io-client": "^1.5.0",
+    "typescript": "^2.0.3",
+    "watchify": "^3.7.0"
+  }
+}
