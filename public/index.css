@@ -1,3 +1,130 @@
+/*
+https://coolors.co/f46036-2a3d45-93e5ab-65b891-4e878c
+https://coolors.co/3d348b-7678ed-f7b801-f18701-f35b04
+*/
+
 * { box-sizing: border-box; }
 html, body { height: 100%; }
-body { margin: 0; font-family: sans-serif; }
+
+body {
+  margin: 0;
+  font-family: 'Varela Round', sans-serif;
+  /* font-family: 'Crete Round', serif; */
+  font-size: 32px;
+  color: #eee;
+  display: flex;
+  flex-flow: column;
+}
+
+body a {
+  color: #fff;
+}
+
+body.disconnected {
+  text-align: center;
+  padding: 1em;
+  color: #444;
+}
+
+.emoji {
+  height: 1em;
+}
+
+.top-bar {
+  padding: 0.5em;
+  background-color: #2a3d45;
+  display: flex;
+}
+
+.top-bar .user {
+  flex: 1;
+}
+
+.top-bar .about {
+  font-size: 50%;
+  opacity: 0.4;
+}
+
+.top-bar .about-emojione {
+  font-size: smaller;
+}
+
+.main {
+  flex: 1;
+  background-color: #eee;
+  color: #4e878c;
+  overflow-y: scroll;
+}
+
+.main .header {
+  text-align: center;
+  background: #fcebb9;
+  display: flex;
+}
+
+@media (max-width: 1000px) {
+  .main .header {
+    display: block;
+  }
+}
+
+.main .header .logo {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  font-family: "Crete Round", sans-serif;
+  margin: 0;
+  background: #f9d15d;
+  padding: 1em;
+}
+
+.main .header .logo h1 {
+  margin: 0.25em;
+}
+
+.main .header .info {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+.main .header .info p {
+  margin: 0.5em;
+}
+
+.main .header p {
+  white-space: nowrap;
+}
+
+.main h2 {
+  padding: 0.5em;
+  margin: 0;
+}
+
+.live-games {
+  background: #c0c1f6;
+  color: #5658ad;
+}
+
+.live-games h2 {
+  background: #8284ee;
+}
+
+.content-packs {
+  background: #c4f0d1;
+}
+
+.content-packs h2 {
+  background: #86d19c;
+}
+
+.main .page > div .loading,
+.main .page > div .content {
+  padding: 1em;
+}

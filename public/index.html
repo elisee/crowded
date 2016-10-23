@@ -1,11 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Crowded — Game show for Twitch.tv and Beam.pro streams</title>
+  <meta charset="utf-8">
   <link rel="stylesheet" href="index.css" />
+  <link href="https://fonts.googleapis.com/css?family=Crete+Round|Varela+Round" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/emojione/2.2.6/lib/js/emojione.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
 </head>
 <body>
-  <canvas></canvas>
+  <div class="top-bar">
+    <div class="game-title" hidden></div>
+
+    <div class="user">
+      <div class="loading">&nbsp;</div>
+
+      <div class="logged-in" hidden>
+        <div class="username"></div>
+        <a href="#" class="log-out">Log out</a>
+      </div>
+
+      <div class="logged-out" hidden>
+        <a href="#" class="log-in">Log in</a>
+      </div>
+    </div>
+
+    <div class="about">
+      <div class="about-sparklinlabs">A game by Sparklin Labs <img src="images/emojis/sparkling_heart.svg" class="emoji" alt="💖" /></div>
+      <div class="about-emojione">Emojis provided by <a href="http://emojione.com/">EmojiOne</a></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="home">
+      <div class="header">
+        <div class="logo">
+          <img src="images/crowd-1.svg" />
+          <h1>Crowded</h1>
+          <img src="images/crowd-2.svg" />
+        </div>
+        <div class="info">
+          <p><b>Game show for Twitch.tv and <wbr>Beam.pro streams.</b><br>2-4 contestants team up <wbr>with up to 80 audience members!</p>
+          <p><b>Anyone can host shows, <wbr>everyone can create content!</b><br>Large selection of<wbr> questions and themes <wbr>curated by the community.</p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="live-games">
+          <h2><img src="images/emojis/tv.svg" class="emoji" alt="📺" /> Live Games</h2>
+
+          <div class="loading">Loading...</div>
+
+          <div class="content" hidden>
+            <div class="actions">
+              <a href="#" class="host-game">Host game</a>
+            </div>
+
+            <div class="games-list"></div>
+          </div>
+        </div>
+
+        <div class="content-packs">
+          <h2><img src="images/emojis/card_box.svg" class="emoji" alt="🗃" /> Content Packs</h2>
+
+          <div class="loading">Loading...</div>
+
+          <div class="content" hidden>
+            <div class="actions">
+              <a href="#" class="create-question-pack">Create new pack</a>
+            </div>
+
+            <div class="curated-packs">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="in-game" hidden>
+      <div class="main">
+        <div class="game-setup">
+          <div>Name: <input type="text"></div>
+        </div>
+
+        <div class="">
+          <div class="stage"></div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="chat">
+        </div>
+        <div class="stream">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="index.js"></script>
 </body>
 </html>
