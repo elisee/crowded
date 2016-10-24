@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crowded — Twitch auth</title>
+  <meta charset="utf-8">
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+</head>
+<body>
+  <div></div>
+  <script>
+    if (window.location.search.indexOf("error") === -1) {
+      Twitch.init({ clientId: "__TWITCH_CLIENT_ID__" }, function(error, status) {
+        if (error != null) {
+          document.querySelector("div").textContent = `An error occured: ${error}`;
+          return;
+        }
+        window.location = "/";
+      });
+    } else {
+      document.querySelector("div").textContent = `An error occured: ${window.location.search}`;
+    }
+  </script>
+</body>
+</html>

@@ -28,9 +28,9 @@ declare module Twitch {
 
   export function init(options: InitOptions, callback: GetStatusCallback): void;
   export function getStatus(callback: GetStatusCallback): void;
-  export function getToken(): void;
+  export function getToken(): string;
   export function login(options: LoginOptions): void;
-  export function logout(callback: LogoutCallback): void;
+  export function logout(callback?: LogoutCallback): void;
   export function api(options: APIOptions, callback: APICallback): void;
 
   interface TwitchEventEmitter extends NodeJS.EventEmitter {
@@ -42,10 +42,11 @@ declare module Twitch {
 }
 
 interface PrivateConfig {
+  protocol: string;
+  hostname: string;
   twitch: {
     clientId: string;
     secret: string;
-    redirectURI: string;
   }
 }
 

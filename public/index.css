@@ -4,6 +4,7 @@ https://coolors.co/3d348b-7678ed-f7b801-f18701-f35b04
 */
 
 * { box-sizing: border-box; }
+*[hidden] { display: none !important; }
 html, body { height: 100%; }
 
 body {
@@ -30,6 +31,7 @@ body.disconnected {
   height: 1em;
 }
 
+/* Top bar */
 .top-bar {
   padding: 0.5em;
   background-color: #2a3d45;
@@ -40,6 +42,32 @@ body.disconnected {
   flex: 1;
 }
 
+.top-bar .logged-out {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .logged-out .log-in {
+  white-space: nowrap;
+  padding-right: 0.5em;
+}
+
+.top-bar .log-in-info { display: none; }
+.top-bar .logged-out:hover .log-in-info {
+  display: initial;
+  font-size: 0.4em;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.top-bar .logged-in {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .logged-in .username { padding-right: 0.5em; }
+.top-bar .logged-in .log-out { color: #ccc; font-size: smaller; }
+
 .top-bar .about {
   font-size: 50%;
   opacity: 0.4;
@@ -49,26 +77,28 @@ body.disconnected {
   font-size: smaller;
 }
 
-.main {
+/* Views */
+.views {
   flex: 1;
   background-color: #eee;
   color: #4e878c;
   overflow-y: scroll;
 }
 
-.main .header {
+.views .header {
   text-align: center;
   background: #fcebb9;
   display: flex;
 }
 
 @media (max-width: 1000px) {
-  .main .header {
+  .views .header {
     display: block;
   }
 }
 
-.main .header .logo {
+/* Home */
+.home .header .logo {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -81,11 +111,11 @@ body.disconnected {
   padding: 1em;
 }
 
-.main .header .logo h1 {
+.home .header .logo h1 {
   margin: 0.25em;
 }
 
-.main .header .info {
+.home .header .info {
   flex: 1;
   display: flex;
   flex-flow: column;
@@ -94,15 +124,15 @@ body.disconnected {
   padding: 0.5em;
 }
 
-.main .header .info p {
+.home .header .info p {
   margin: 0.5em;
 }
 
-.main .header p {
+.home .header p {
   white-space: nowrap;
 }
 
-.main h2 {
+.home h2 {
   padding: 0.5em;
   margin: 0;
 }
@@ -124,7 +154,11 @@ body.disconnected {
   background: #86d19c;
 }
 
-.main .page > div .loading,
-.main .page > div .content {
+.home .main > div .loading {
+  opacity: 0.2;
+}
+
+.home .main > div .loading,
+.home .main > div .content {
   padding: 1em;
 }

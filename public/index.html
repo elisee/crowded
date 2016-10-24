@@ -15,25 +15,24 @@
     <div class="game-title" hidden></div>
 
     <div class="user">
-      <div class="loading">&nbsp;</div>
-
       <div class="logged-in" hidden>
         <div class="username"></div>
         <a href="#" class="log-out">Log out</a>
       </div>
 
       <div class="logged-out" hidden>
-        <a href="#" class="log-in">Log in</a>
+        <a href="#" class="log-in">Log in to play</a>
+        <div class="log-in-info">with Twitch. We don't store any info. Pinky swear!</div>
       </div>
     </div>
-
+    &nbsp;
     <div class="about">
       <div class="about-sparklinlabs">A game by Sparklin Labs <img src="images/emojis/sparkling_heart.svg" class="emoji" alt="💖" /></div>
       <div class="about-emojione">Emojis provided by <a href="http://emojione.com/">EmojiOne</a></div>
     </div>
   </div>
 
-  <div class="main">
+  <div class="views">
     <div class="home">
       <div class="header">
         <div class="logo">
@@ -47,7 +46,7 @@
         </div>
       </div>
 
-      <div class="page">
+      <div class="main">
         <div class="live-games">
           <h2><img src="images/emojis/tv.svg" class="emoji" alt="📺" /> Live Games</h2>
 
@@ -80,15 +79,13 @@
       </div>
     </div>
 
+    <div class="host-game" hidden>
+      <div>Name: <input type="text"></div>
+    </div>
+
     <div class="in-game" hidden>
       <div class="main">
-        <div class="game-setup">
-          <div>Name: <input type="text"></div>
-        </div>
-
-        <div class="">
-          <div class="stage"></div>
-        </div>
+        <div class="stage"></div>
       </div>
       <div class="sidebar">
         <div class="chat">
