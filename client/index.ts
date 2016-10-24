@@ -9,13 +9,11 @@ import "./errorHandler";
 import { socket, config } from "./network";
 
 import * as homeView from "./homeView";
-import * as hostGameView from "./hostGameView";
 import * as inGameView from "./inGameView";
 import * as topBar from "./topBar";
 
 const views: { [name: string]: AppView } = {
   "home": homeView,
-  "hostGame": hostGameView,
   "inGame": inGameView
 };
 

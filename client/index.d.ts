@@ -6,16 +6,12 @@ interface HomeViewState {
   view: "home"
 }
 
-interface HostGameViewState {
-  view: "hostGame";
-}
-
 interface InGameViewState {
   view: "inGame";
   gameId: string;
 }
 
-type AppState = LoadingViewState | HomeViewState | HostGameViewState | InGameViewState;
+type AppState = LoadingViewState | HomeViewState | InGameViewState;
 
 interface AppView {
   show(): void;
