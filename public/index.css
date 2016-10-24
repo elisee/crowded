@@ -97,6 +97,15 @@ body.disconnected {
   }
 }
 
+/* Loading */
+.views > .loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.2;
+  padding: 1em;
+}
+
 /* Home */
 .home .header .logo {
   display: flex;

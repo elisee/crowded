@@ -1,6 +1,5 @@
-import { $ } from "./index";
-import { socket } from "./network";
-
+import { $ } from "../";
+import { socket } from "../network";
 
 export function refresh() {
   $(".live-games .content").hidden = true;

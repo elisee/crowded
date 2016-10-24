@@ -1,122 +1,49 @@
+/// <reference path="./index.d.ts" />
 /// <reference path="../index.d.ts" />
 
-import { socket, config } from "./network";
-import * as liveGames from "./liveGames";
-import * as contentPacks from "./contentPacks";
-
 export const $ = (selector: string) => document.querySelector(selector) as HTMLElement;
+export let appState: AppState = { view: "home" };
+export let activeView: AppView;
 
-socket.on("disconnect", onDisconnect);
-socket.on("welcome", onWelcome);
+import "./errorHandler";
+import { socket, config } from "./network";
 
-const topBarLoggedOutDiv = $(".top-bar .user .logged-out");
-const topBarLoggedInDiv = $(".top-bar .user .logged-in");
+import * as homeView from "./homeView";
+import * as hostGameView from "./hostGameView";
+import * as inGameView from "./inGameView";
+import * as topBar from "./topBar";
 
-topBarLoggedOutDiv.querySelector(".log-in").addEventListener("click", onLogInClick);
-topBarLoggedInDiv.querySelector(".log-out").addEventListener("click", onLogOutClick);
+const views: { [name: string]: AppView } = {
+  "home": homeView,
+  "hostGame": hostGameView,
+  "inGame": inGameView
+};
 
-const homeDiv = $("body > .views > .home");
-homeDiv.querySelector(".live-games .actions > .host-game").addEventListener("click", onHostGameClick);
+export function setActiveView(newState: AppState) {
+  appState = newState;
 
-const hostGameDiv = $("body > .views > .host-game");
-const inGameDiv = $("body > .views > .in-game");
-
-Twitch.events.addListener("auth.login", onTwitchLoggedIn);
-Twitch.events.addListener("auth.logout", onTwitchLoggedOut);
-
-function onDisconnect() {
-  document.body.className = "disconnected";
-  document.body.innerHTML = "Whoops, you have been disconnected 😞. Plz reload the page.";
-}
-
-function onError() {
-  socket.close();
-  document.body.className = "disconnected";
-  document.body.innerHTML = "Whoops, you encountered a bug 😞. Plz reload the page.<br>Open the devtools console (F12) for details.";
-}
-
-window.onerror = onError;
-
-interface AuthCallbackHostAction {
-  view: "host-game";
-}
-
-interface AuthCallbackGameAction {
-  view: "in-game";
-  gameId: string;
-}
-
-type AuthCallbackAction = AuthCallbackHostAction | AuthCallbackGameAction ;
-
-const authCallbackActionJSON = localStorage.getItem("authCallbackAction");
-if (authCallbackActionJSON != null) {
-  localStorage.removeItem("authCallbackAction");
-  const authCallbackAction: AuthCallbackAction = JSON.parse(authCallbackActionJSON);
-
-  homeDiv.hidden = true;
-
-  if (authCallbackAction.view === "host-game") hostGameDiv.hidden = false;
-  else if (authCallbackAction.view === "in-game") {
-    inGameDiv.hidden = false;
-    // TODO: authCallbackAction.gameId
+  for (const viewDiv of document.querySelectorAll("body > .views > div")) {
+    (viewDiv as HTMLElement).hidden = true;
   }
+
+  activeView = views[appState.view];
+  activeView.show();
 }
 
+// Restore saved state if coming back from auth callback
+const authCallbackViewStateJSON = localStorage.getItem("authCallbackAction");
+if (authCallbackViewStateJSON != null) {
+  localStorage.removeItem("authCallbackAction");
+  appState = JSON.parse(authCallbackViewStateJSON);
+}
 
-function onWelcome() {
-  liveGames.refresh();
-  contentPacks.refresh();
+// Setup initial view as soon as config has been received
+socket.on("welcome", () => {
+  setActiveView(appState);
 
   Twitch.init({ clientId: config.twitch.clientId }, (error, status) => {
     if (error != null) console.error(error);
 
-    if (!status.authenticated) {
-      topBarLoggedOutDiv.hidden = false;
-    } else {
-
-    }
+    topBar.init(status.authenticated);
   });
-}
-
-function onTwitchLoggedIn() {
-  Twitch.api({ method: "/user", verb: "GET" }, (err, result) => {
-    if (err != null) throw err;
-
-    topBarLoggedInDiv.hidden = false;
-    topBarLoggedInDiv.querySelector(".username").textContent = result.display_name;
-  });
-
-  topBarLoggedOutDiv.hidden = true;
-}
-
-function onTwitchLoggedOut() {
-  topBarLoggedInDiv.hidden = true;
-  topBarLoggedOutDiv.hidden = false;
-}
-
-function onLogInClick(event: MouseEvent) {
-  event.preventDefault();
-
-  // TODO: Store current open game and return to it after logging in
-  doTwitchLogin(null);
-}
-
-function doTwitchLogin(callbackAction: AuthCallbackAction|null) {
-  if (callbackAction == null) localStorage.removeItem("authCallbackAction");
-  else localStorage.setItem("authCallbackAction", JSON.stringify(callbackAction));
-
-  Twitch.login({ redirect_uri: config.twitch.redirectURI, scope: [ "user_read" ], popup: false });
-}
-
-function onLogOutClick(event: MouseEvent) {
-  event.preventDefault();
-
-  Twitch.logout();
-}
-
-function onHostGameClick(event: MouseEvent) {
-  event.preventDefault();
-
-  const token = Twitch.getToken();
-  if (token == null) doTwitchLogin({ view: "host-game" });
-}
+});
