@@ -1,23 +1,28 @@
-import { topBarLoggedInDiv, topBarLoggedOutDiv } from "./topBar";
+import * as topBar from "./topBar";
+import { activeView } from "./";
 import { config } from "./network";
 
 Twitch.events.addListener("auth.login", onTwitchLoggedIn);
 Twitch.events.addListener("auth.logout", onTwitchLoggedOut);
 
+export let user: {
+  display_name: string;
+}
+
 function onTwitchLoggedIn() {
   Twitch.api({ method: "/user", verb: "GET" }, (err, result) => {
     if (err != null) throw err;
 
-    topBarLoggedInDiv.hidden = false;
-    topBarLoggedInDiv.querySelector(".username").textContent = result.display_name;
+    user = result;
+    topBar.onLoggedIn();
+    activeView.onLoggedIn();
   });
 
-  topBarLoggedOutDiv.hidden = true;
+  topBar.onLoggingIn();
 }
 
 function onTwitchLoggedOut() {
-  topBarLoggedInDiv.hidden = true;
-  topBarLoggedOutDiv.hidden = false;
+  window.location.assign("/");
 }
 
 export function doTwitchLogin(authCallbackAppState: AppState|null) {

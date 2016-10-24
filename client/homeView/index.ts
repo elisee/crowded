@@ -24,6 +24,6 @@ export function show() {
   contentPacks.refresh();
 }
 
-export function onLoggedOut() {
-  // Nothing
+export function onLoggedIn() {
+  // Ignore
 }

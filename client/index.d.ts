@@ -8,12 +8,12 @@ interface HomeViewState {
 
 interface InGameViewState {
   view: "inGame";
-  gameId: string;
+  channel?: string;
 }
 
 type AppState = LoadingViewState | HomeViewState | InGameViewState;
 
 interface AppView {
   show(): void;
-  onLoggedOut(): void;
+  onLoggedIn(): void;
 }
