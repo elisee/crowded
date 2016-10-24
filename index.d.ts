@@ -70,7 +70,7 @@ interface LoginData {
 
 interface LiveGameInfo {
   title: string;
-  service: "twitch.tv"|"beam.pro";
+  service: "twitch.tv"; // TODO: Support other services
   host: string;
   contestants: string[];
   players: number;

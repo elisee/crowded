@@ -1,6 +1,6 @@
 # [Crowded](http://crowded.sparklinlabs.com/)
 
-Game show for Twitch.tv and Beam.pro streams.
+Game show for Twitch.tv streams.
 
 Code is public but I haven't decided on any license yet.  
 Feel free to check it out and learn from it though.
