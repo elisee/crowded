@@ -87,7 +87,62 @@
 
     <div class="in-game" hidden>
       <div class="main">
-        <div class="stage"></div>
+        <div class="loading">Loading...</div>
+
+        <div class="content" hidden>
+          <div class="stage"></div>
+
+          <div class="game-setup" hidden>
+            <div class="contestants" hidden>
+              <h2>. Select contestants</h2>
+              <div class="applications">
+                <div class="header">
+                  <div class="selected"></div>
+                  <input type="search" />
+                </div>
+                <div class="list"></div>
+              </div>
+              <div class="settings">
+                <div class="max-team-size">Max number of audience members per team: <input type="number" min="1" max="20" value="20"></div>
+              </div>
+              <div class="actions">
+                <div><button>Confirm and select questions!</button></div>
+              </div>
+            </div>
+
+            <div class="teams-and-question-packs">
+              <h2>. Select question packs</h2>
+              <div class="settings">
+                <div class="questions-count">Number of questions: <input type="number" min="3" max="20" value="8" /></div>
+                <div class="questions-language">Language of questions: <select></select></div>
+              </div>
+              <div class="questions-packs">
+                <div class="header">
+                  <div class="selected"></div>
+                  <input type="search" />
+                </div>
+                <div class="list"></div>
+              </div>
+              <div class="actions">
+                <div><button>Start the show!</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question" hidden>
+            <div class="header">
+              <div class="number"></div>
+              <div class="pack"></div>
+            </div>
+            <div class="content">
+            </div>
+            <div class="bet">
+              <button data-points="10">Bet 10 points</button>
+              <button data-points="20">Bet 20 points</button>
+              <button data-points="2x">2x or quits</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="sidebar">
         <div class="chat">
